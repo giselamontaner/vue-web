@@ -1,4 +1,19 @@
+<script setup lang="ts">
+import { Button } from '@/components/ui/button'
+</script>
 
 <template>
-  <h1>Home page</h1>
+  <div class="cappa">
+      <h1>Home page</h1>
+  <Button variant="destructive">Clic me</Button>
+  </div>
+
 </template>
+
+<style scoped>
+
+.cappa{
+  margin: 20px;
+}
+
+</style>
