@@ -52,7 +52,7 @@ body {
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  
+
   /* Brand colors */
   --color-simpsons-yellow: #ffde00;
   --color-simpsons-red: #ee3133;
