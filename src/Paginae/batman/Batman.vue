@@ -10,10 +10,13 @@
 
   import Carrusimagunum from '@/components/carrusimagunum.vue';
   import { scrollToSection } from '@/utils/scrollToSection';
-  import { onMounted, ref } from 'vue';
+  import { onMounted, onUnmounted, ref } from 'vue';
   import { Toggle } from '@/components/ui/toggle'
+import { useMouseMotio } from '@/composables/useMouseMotio';
 
   const photos = ["justice", "arkham", "superman", "varios", "villana", "villano", "grupo", "robin", "anne", "joker", "resplandor", "cat", "gafas", "league", "fondoVerde"]; 
+
+ const { mousePositione, cumMouseMove, cumMouseLeave  } = useMouseMotio()
 
   const videreMenu = ref<boolean>(true)
 
@@ -29,6 +32,12 @@
     handleResize()
     window.addEventListener('resize', handleResize)
   })
+
+
+  onUnmounted (()=> {
+    window.removeEventListener('resize', handleResize)
+  })
+
 
 </script>
 
@@ -90,7 +99,19 @@
 
     <header class="titulus">
       <h1>Batman</h1>
-      <div id="titulus-batman" class="titulus-img"></div>
+
+      <div 
+       id="titulus-batman" 
+       class="titulus-img"
+       @mousemove="cumMouseMove"
+       @mouseleave="cumMouseLeave"
+       :style="{
+         backgroundPositionX: `calc(50% + ${mousePositione.x}px)`,
+         backgroundPositionY: `calc(50% + ${mousePositione.y}px)`,
+         transition: 'backround-position 0.1s ease-out'
+       }"
+      ></div>
+
       <p>Él puede tomar la decisión que nadie más puede, la decisión correcta</p>
     </header>
 
@@ -183,7 +204,7 @@
   background-size: 100% 100%;
   background-position: center center;
   background-image: url("../imagines/batman/batman.jpg");
-  min-height: 100vh;
+  aspect-ratio: 8/7;
 }
 
 .titulus-img:hover {
@@ -192,7 +213,7 @@
 
 .titulus > h1 {
   position: absolute;
-  top: 63%;
+  top: calc(100vw * 0.5);
   width: 100%;
   text-align: center;
   font-size: 5rem; 
@@ -203,7 +224,7 @@
 
 .titulus > p {
   position: absolute;
-  top: 36%;
+  top: calc(100vw * 0.25);
   width: 100%;
   text-align: center;
   font-size: 2rem;
