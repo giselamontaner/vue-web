@@ -54,14 +54,14 @@
 <template>
     <div>
         <Toggle
-       class="fixed top-2 right-4 z-50 bg-slate-500 sm:hidden"
-       @click="videreMenu = !videreMenu"
-      >
+          class="fixed top-2 right-4 z-50 bg-slate-500 sm:hidden"
+          @click="videreMenu = !videreMenu"
+        >
         <Menu />
       </Toggle>
 
     <nav v-if="videreMenu" class="extra-nav flex flex-col sm:flex-row justify-between px-3">
-      <RouterLink to="homeRoute">
+      <RouterLink :to="homeRoute">
        <House class="icon-home"/>
       </RouterLink>
 
@@ -70,10 +70,10 @@
 
           <NavigationMenuItem v-for="item in items" :key="item.label">
                 <a 
-                 :about="item.href"
-                  @click.prevent="item.onClick ? item.onClick() : null"
+                 :href="item.href"
+                  @click.prevent="item.onClick ? item.onClick() : $router.push(item.href)"
                  >
-                    <NavigationMenuLink :class="[navigationMenuTriggerStyle(), 'text-md hover:bg-brand-purple hover:text-white transition-colors ']">
+                    <NavigationMenuLink :class="navigationMenuTriggerStyle() + ' text-md hover:bg-brand-purple hover:text-white transition-colors '">
                      {{ item.label }}
                     </NavigationMenuLink>
                 </a>
@@ -102,7 +102,7 @@
     .extra-nav {
     background-color: white;
     opacity: 0.7;
-    box-shadow: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
     position: fixed;
     top: 0;
     width: 11rem;
