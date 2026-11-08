@@ -48,7 +48,7 @@ export const router = createRouter({
               component:Primus
             },
             {
-              path: 'Gallery',
+              path: 'gallery',
               component:Layout,
               children: [
                 {
