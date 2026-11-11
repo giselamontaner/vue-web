@@ -58,7 +58,7 @@ export const router = createRouter({
                 },
                 {
                     path: ':id',
-                    name: 'simpsons-characters',
+                    name: 'simpsons-character',
                     component: Character
                 }
               ]
